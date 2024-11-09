@@ -1,0 +1,22 @@
+server:
+    port: 8081
+    error:
+      include-message: always
+#Configuracion de spring
+spring:
+  #Configuracion de migracion
+  flyway:
+    enabled: true
+    baselineVersion: 1
+    locations:
+      classpath: db/migration
+    sqlMigrationSuffixes: .sql
+    baselineOnMigrate: true
+    sqlMigrationPrefix: V
+    schemas: public
+
+  datasource:
+    url: jdbc:postgresql://raja.db.elephantsql.com/fhncjzkp
+    username: fhncjzkp
+    password: i95iL2aR1DoKE762mjP1hb-bJL39gA2K
+    driver-class-name: org.postgresql.Driver
