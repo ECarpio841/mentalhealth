@@ -7,13 +7,18 @@ import com.mentalhealth.mentalhealth.entity.MoodEntry
 import org.springframework.beans.factory.annotation.Autowired
 
 @RestController
-@RequestMapping("/api/moods")
-class MoodEntryController @Autowired constructor(
-    private val moodEntryService: MoodEntryService
-) {
+@RequestMapping("/moods")
+class MoodEntryController {
+    @Autowired
+    lateinit var moodEntryService: MoodEntryService
+
+    @GetMapping("/with-users") // Ruta relativa
+    fun listMoodEntriesView(): List<MoodEntriesView> {
+        return moodEntryService.listMoodEntriesView()
+    }
 
     @GetMapping
-    fun getAllMoodEntries(): ResponseEntity<List<MoodEntry>> {
+    fun getAllMoodEntries(): ResponseEntity<List<MoodEntry>>  {
         val moodEntries = moodEntryService.getAllMoodEntries()
         return if (moodEntries.isNotEmpty()) {
             ResponseEntity.ok(moodEntries)
@@ -28,3 +33,4 @@ class MoodEntryController @Autowired constructor(
         return ResponseEntity.status(HttpStatus.CREATED).body(moodEntry)
     }
 }
+
